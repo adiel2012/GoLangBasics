@@ -32,6 +32,16 @@ func (c circle) Perimeter() float64 {
 	return 2 * 3.141516 * c.radii
 }
 
+func doDisplay(f ifigure) {
+	f.draw()
+}
+
+func forEach(figures []ifigure, cb func(ifigure)) {
+	for _, i := range figures {
+		cb(i)
+	}
+}
+
 func MainObjects() {
 
 	fmt.Println("==============================================================")
@@ -53,4 +63,7 @@ func MainObjects() {
 			fmt.Printf("found a circle with perimeter (%f)\n", c.Perimeter())
 		}
 	}
+	fmt.Println("========")
+
+	forEach(figures, doDisplay)
 }
