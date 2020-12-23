@@ -32,7 +32,11 @@ func (c circle) Perimeter() float64 {
 	return 2 * 3.141516 * c.radii
 }
 
-func main() {
+func MainObjects() {
+
+	fmt.Println("==============================================================")
+	fmt.Println("Objects")
+	fmt.Println("==============================================================")
 
 	var inst1 ifigure = rectangle{width: 3, height: 4}
 	inst1.draw()
@@ -49,5 +53,4 @@ func main() {
 			fmt.Printf("found a circle with perimeter (%f)\n", c.Perimeter())
 		}
 	}
-
 }
