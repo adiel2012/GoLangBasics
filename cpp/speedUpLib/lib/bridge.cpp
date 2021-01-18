@@ -28,6 +28,22 @@ A::A(int value): m_value(value){}
 
 int A::GetValue()const{ return m_value;}
 
+void GenerateFibonacci(callback_fcn cb)
+{
+    if(!cb(1) || !cb(1))
+    {
+        return;
+    }
+    int a = 1, b = 2;
+    while(cb(b))
+    {
+        int c = a + b;
+        b = c;
+        a = b; 
+    }
+
+}
+
 
  /*
     Compilation
