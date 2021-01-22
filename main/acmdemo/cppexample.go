@@ -6,7 +6,7 @@ package acmdemo
 #include <stdlib.h>
 #include <stdio.h>
 
-int callOnMeGo_cgo(int in); // Forward declaration.
+int callOnMeGo_cgo(int in, int val, void* context); // Forward declaration.
 
 */
 import "C"
@@ -16,12 +16,17 @@ import (
 )
 
 //export displayNumber
-func displayNumber(in int) int {
-	//fmt.Printf("Go.callOnMeGo(): called with arg = %d\n", in)
-	if in > 10 {
+func displayNumber(val int, pos int, context *int) int {
+
+	//fmt.Println(*context)
+
+	if pos > 10 {
 		return 0
 	}
-	fmt.Println(in)
+
+	(*context)++
+
+	fmt.Println(val)
 	return 1
 }
 
@@ -53,6 +58,8 @@ func MainCpp() {
 	fmt.Println(a.value())
 
 	fmt.Printf("Go.main(): calling C function with callback to us\n")
-	C.GenerateFibonacci((C.callback_fcn)(unsafe.Pointer(C.callOnMeGo_cgo)))
+	context := 0
+	C.GenerateFibonacci((C.callback_fcn)(unsafe.Pointer(C.callOnMeGo_cgo)), (unsafe.Pointer(&context)))
+	fmt.Printf("Fibonacci invoked %d times", context)
 
 }

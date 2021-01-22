@@ -28,18 +28,19 @@ A::A(int value): m_value(value){}
 
 int A::GetValue()const{ return m_value;}
 
-void GenerateFibonacci(callback_fcn cb)
+void GenerateFibonacci(callback_fcn cb, void* context)
 {
-    if(!cb(1) || !cb(1))
+    if(!cb(1, 1, context) || !cb(1, 2, context))
     {
         return;
     }
-    int a = 1, b = 2;
-    while(cb(b))
+    int a = 1, b = 2, pos = 3;
+
+    while(cb(b, pos++, context))
     {
         int c = a + b;
-        b = c;
         a = b; 
+        b = c;
     }
 
 }
